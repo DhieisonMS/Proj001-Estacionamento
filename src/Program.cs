@@ -1,2 +1,6 @@
-﻿// See https://aka.ms/new-console-template for more information
-Console.WriteLine("Hello, World!");
+﻿using src.Model;
+
+Parking one = new Parking();
+one.Vacancies = 1;
+
+Console.WriteLine(one.Vacancies);
