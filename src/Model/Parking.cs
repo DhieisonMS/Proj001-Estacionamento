@@ -1,5 +1,6 @@
 using System;
 using System.Text.RegularExpressions;
+using System.Threading;
 
 namespace src.Model;
 
@@ -7,24 +8,50 @@ public class Parking
 {
     public Parking(){}
 
-    public List<string> _veiculos = new List<string>();
+    private List<string> veiculos = new List<string>();
 
     public void GetVeiculos()
     {
-        
-        if(_veiculos.Count == 0)
+        if(veiculos.Count == 0)
         {
-            Console.WriteLine("Nenhum Veiculo cadastrado");
+           Console.WriteLine("Nenhum Veiculo cadastrado");
         }
         else
         {
-            foreach (var countveiculos in _veiculos)
+            Console.Clear();
+            Console.WriteLine("Veiculos Cadastrados:");
+            int contador = 0;
+            foreach (string veiculo in veiculos)
             {  
-                Console.WriteLine("Veiculos Cadastrados:");
-                Console.WriteLine($"\t{countveiculos}");
+                Console.WriteLine($"\t{contador} placa: {veiculo}");
+                contador++;
             }
+
         }
-        
+    }
+
+    public void SetVeiculo()
+    {
+        Console.WriteLine("Informe sua placa");
+        string placa = Console.ReadLine();
+        bool result = ValidaPlaca(placa);
+
+        if (!result)
+        {
+            Console.WriteLine("Placa invalida digite novamente conforme o exemplo: AAA1234");
+        }
+        else
+        {
+            veiculos.Add(placa);
+        }
+    }
+
+    public void RmVeiculos()
+    {
+        Console.WriteLine("Informe a ser removida placa: ");
+        string placa = Console.ReadLine();
+        veiculos.Remove(placa);
+
     }
 
     public bool ValidaPlaca(string placa)
@@ -41,22 +68,12 @@ public class Parking
         }
     }
 
-    public void SetVeiculo()
+    public void AdicionarVeiculo()
     {
-        Console.WriteLine("Informe sua placa");
+        Console.WriteLine("Digite a placa do veículo para estacionar:");
         string placa = Console.ReadLine();
-        bool result = ValidaPlaca(placa);
-
-        if (!result)
-        {
-            Console.WriteLine("Placa invalida digite novamente conforme o exemplo: AAA1234");
-        }
-        else
-        {
-            _veiculos.Add(placa);
-            Console.WriteLine($"Placa cadastrada{placa}");
-           
-            
-        }
+        veiculos.Add(placa);
     }
+
+
 }
